@@ -1,0 +1,45 @@
+/******************************************************************************
+
+Необходимо создать arrayList и LinkedList, заполнить их и измерить скорость заполнения
+
+*******************************************************************************/
+import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Main
+{
+  public static void main (String[]args)
+  {
+    System.out.println ("Hello World");
+    Map < Integer, String > db = new HashMap < Integer, String > ();
+    db.put (1, "one");
+    System.out.println (db);
+    db.put (2, "two");
+    System.out.println (db);
+    db.putIfAbsent (1, "one");
+    System.out.println (db);
+
+
+    long StartTime1 = System.nanoTime ();
+      List < Integer > arrayList1 = new ArrayList <> ();
+    for (int i = 0; i < 100000; i++)
+      {
+	arrayList1.add (i);
+      }
+
+    long EndTime1 = System.nanoTime ();
+    System.out.println (EndTime1 - StartTime1);
+
+
+    long StartTime2 = System.nanoTime ();
+    List < Integer > LinkedList1 = new LinkedList <> ();
+    for (int i = 0; i < 100000; i++)
+      {
+	LinkedList1.add (i);
+      }
+    long EndTime2 = System.nanoTime ();
+    System.out.println (EndTime2 - StartTime2);
+
+  }
+}
