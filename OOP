@@ -1,0 +1,64 @@
+
+public class Main
+{
+	public static void main(String[] args) {
+		box first = new box(9,100,11);
+		box second = new box(10);
+		box third = new box(first);
+		box fourth = first.copyMethod();
+		fourth.showMethod();
+		first.compareValue(second);
+	}
+}
+
+
+public class box // может стоит вынести этот класс в другой файл
+{
+    int length;
+    int wight;
+    int height;
+    
+    box(int length, int wight, int height)
+    {
+        this.length = length;
+        this.wight = wight;
+        this.height = height;
+    }
+    
+    box(int size)
+    {
+        this(size,size,size);
+    }
+    
+    box(box another)
+    {
+        this(another.length,another.wight,another.height);
+    }
+    
+    int getValue()
+    {
+        return length*wight*height;
+    }
+    
+    void compareValue(box Object1)
+    {
+        int firstValue = getValue();
+        int secondValue = Object1.getValue();
+        if (firstValue > secondValue){System.out.println("firstValue > secondValue");}
+        else if (firstValue < secondValue){System.out.println("firstValue < secondValue");}
+        else {System.out.println("firstValue == secondValue");}
+    }
+    
+    box copyMethod()
+    {
+       return new box(this.length, this.wight, this.height);
+    }
+    
+    
+    void showMethod()
+    {
+        System.out.println("length: " +length+ "\nwight: "+wight+"\nheight: "+height);
+    }
+    
+    
+}
