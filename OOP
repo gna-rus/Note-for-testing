@@ -4,38 +4,45 @@ public class Main
 	public static void main(String[] args) {
 		box first = new box(9,100,11);
 		box second = new box(10);
+		first.compareValue(second);
+		
 		box third = new box(first);
+		third.showMethod();
+		
 		box fourth = first.copyMethod();
 		fourth.showMethod();
-		first.compareValue(second);
+		
+		box fivth = first.increase();
+		fivth.showMethod();
+		
 	}
 }
 
 
-public class box // может стоит вынести этот класс в другой файл
+public class box
 {
     int length;
     int wight;
     int height;
     
-    box(int length, int wight, int height)
+    box(int length, int wight, int height) // конструктор 1
     {
         this.length = length;
         this.wight = wight;
         this.height = height;
     }
     
-    box(int size)
+    box(int size) // конструктор 2
     {
         this(size,size,size);
     }
     
-    box(box another)
+    box(box another) // конструктор 2 через прием обьекта
     {
         this(another.length,another.wight,another.height);
     }
     
-    int getValue()
+    int getValue() // метод возврата информации
     {
         return length*wight*height;
     }
@@ -54,10 +61,16 @@ public class box // может стоит вынести этот класс в 
        return new box(this.length, this.wight, this.height);
     }
     
+    box increase()
+    {
+       return new box(this.length*2, this.wight*2, this.height*2); 
+    }
+    
     
     void showMethod()
     {
         System.out.println("length: " +length+ "\nwight: "+wight+"\nheight: "+height);
+        System.out.println("#########");
     }
     
     
