@@ -21,33 +21,64 @@ public class Main
 
 public class box
 {
-    int length;
-    int wight;
-    int height;
+    private int length;
+    private int wight;
+    private int height;
     
-    box(int length, int wight, int height) // конструктор 1
+    public int getLength()
+    {
+        return length;
+    }
+    
+    public int getWight()
+    {
+        return wight;
+    }
+    
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public void setLength(int length)
+    {
+        this.length = length;
+    }
+    
+    public void setWight(int wight)
+    {
+        this.wight = wight;
+    }
+    
+    public void setHeight(int height)
+    {
+        this.height = height;
+    }
+    
+    
+    public box(int length, int wight, int height)
     {
         this.length = length;
         this.wight = wight;
         this.height = height;
     }
     
-    box(int size) // конструктор 2
+    public box(int size)
     {
         this(size,size,size);
     }
     
-    box(box another) // конструктор 2 через прием обьекта
+    public box(box another)
     {
         this(another.length,another.wight,another.height);
     }
     
-    int getValue() // метод возврата информации
+    private int getValue()
     {
         return length*wight*height;
     }
     
-    void compareValue(box Object1)
+    public void compareValue(box Object1)
     {
         int firstValue = getValue();
         int secondValue = Object1.getValue();
@@ -56,22 +87,19 @@ public class box
         else {System.out.println("firstValue == secondValue");}
     }
     
-    box copyMethod()
+    public box copyMethod()
     {
        return new box(this.length, this.wight, this.height);
     }
     
-    box increase()
+    public box increase()
     {
        return new box(this.length*2, this.wight*2, this.height*2); 
     }
     
-    
-    void showMethod()
+    public void showMethod()
     {
         System.out.println("length: " +length+ "\nwight: "+wight+"\nheight: "+height);
         System.out.println("#########");
     }
-    
-    
 }
