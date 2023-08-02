@@ -3,6 +3,7 @@ public class Main
 {
 	public static void main(String[] args) {
 		MyArrayList ListOfPerson2 = ListOfPersons();
+		ListOfPerson2.remove("Boris"); // удаляю элемент
 		for(int i = 0; i < ListOfPerson2.getSize(); i++){
 		    System.out.println(ListOfPerson2.get(i));
 		}
