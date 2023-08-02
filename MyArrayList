@@ -1,0 +1,72 @@
+
+public class Main
+{
+	public static void main(String[] args) {
+		MyArrayList ListOfPerson2 = ListOfPersons();
+		for(int i = 0; i < ListOfPerson2.getSize(); i++){
+		    System.out.println(ListOfPerson2.get(i));
+		}
+	}
+	
+	// метод заполняющий MyArrayList
+	public static MyArrayList ListOfPersons(){
+	    MyArrayList ListOfPerson1 = new MyArrayList();
+	    ListOfPerson1.add("Anton");
+	    ListOfPerson1.add("Boris");
+	    ListOfPerson1.add("Constantin");
+	    ListOfPerson1.add("Dmitriy");
+	    return ListOfPerson1;
+	}
+}
+
+public class MyArrayList 
+{
+    private String[] array = new String[10];
+    private int size = 0;
+    
+    public String get(int index){
+        return array[index];
+    }
+    
+    public int getSize()
+    {
+        return size;
+    }
+    
+    public void add(String element) // метод добавления элемента
+    {
+        array[size] = element;
+        size++;
+        if (size == array.length)
+        {
+            String[] newArray = new String[array.length * 2];
+            for(int i = 0; i < size; i++)
+            {
+                newArray[i] = array[i];
+            }
+            array = newArray;
+        }
+    }
+    
+    public void remove(int index) // метод удаления элемента по индексу
+    {
+        for(int i = index; i < size-1; i++)
+        {
+            array[i] = array[i+1];
+        }
+        array[size] = null;
+        size--;
+    }
+    
+    public void remove(String element) // метод удаления элемента содержимому
+    {
+        for(int i = 0; i < size; i++){
+            if(element.equals(array[i])){
+                remove(i);
+                return;
+            }
+        }
+    }    
+}
+
+
