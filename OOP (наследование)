@@ -1,0 +1,73 @@
+
+public class Main
+{
+	public static void main(String[] args) {
+	    
+		System.out.println("Hello World");
+		
+		cat cat1 = new cat();
+		lion lion1 = new lion();
+        CatFamily CatFamily1 = new CatFamily(5,5,true);
+		
+		System.out.println(cat1.canEatPersone+" | "+cat1.legs+" | " + cat1.eyes +" | ");
+		System.out.println(lion1.canEatPersone+" | "+lion1.legs+" | " + lion1.eyes +" | ");
+		System.out.println(CatFamily1.canEatPersone+" | "+CatFamily1.legs+" | " + CatFamily1.eyes +" | ");
+		lion1.Eat();
+		cat1.Eat();
+	}
+}
+
+
+class CatFamily {
+    public int legs;
+    public int eyes;
+    public boolean canEatPersone;
+    
+    // этот метод нужен для работы с super (без него можно работать, 
+    // но изначальные значения тогда надо задать в полях)
+    public CatFamily(int legs, int eyes, boolean canEatPersone) 
+    {
+        this.legs = legs;
+        this.eyes = eyes;
+        this.canEatPersone = canEatPersone;
+    }
+    
+    public void Eat()
+    {
+        System.out.println("Кушаю еду!");
+    }
+}
+
+
+class cat extends CatFamily
+{
+    public cat()
+    {
+        super(4,3,true); // передаю в родительский класс значения
+        canEatPersone = false;
+    }
+    
+    // переопределение метода Суперкласса
+    @Override // Оверрайд - просто пометка что это переопределенный метод
+    public void Eat()
+    {
+        System.out.println("Хрум-Хрум-Хрум! Мяу!");
+    }
+}
+
+
+class lion extends CatFamily
+{
+    public lion()
+    {
+        super(10,10,true);
+    }
+    
+    @Override 
+    public void Eat()
+    {
+        System.out.println("Ем вкусное мяско!");
+        super.Eat();// принудительно вызываю суперкласс
+    }
+    
+}
