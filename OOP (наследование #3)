@@ -1,0 +1,128 @@
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+
+		triangle triangle1 = new triangle(12,22,32);
+		triangle1.showPerimetr();
+		
+		rectangle rectangle1 = new rectangle(50,60);
+		rectangle1.showPerimetr();
+		
+		ColorRect ColorRect1 = new ColorRect(10,15,"red");
+		ColorRect1.showPerimetr(); // будет переопределен на метод для Прямоугольника, 
+		                           // хотя самого такого метода в классе ColorRect нет
+		ColorRect1.showColor();
+	}
+}
+
+// в данном классе нету ни углов ни нормальных сторон поэтому
+// это просто обстрактный класс фигуры, необходимый для создания нормальныйх фигур
+// слово abstract указывает на это и теперь этот класс пригоден только для того чтобы быть
+// родительским классом и не более
+public abstract class shape 
+{
+    int aSize;
+    int bSize;
+    
+    public shape()
+    {
+        this.aSize = 0;
+        this.bSize = 0;
+    }
+    
+    public shape(int aSize, int bSize)
+    {
+        this.aSize = aSize;
+        this.bSize = bSize;
+    }
+    // final запрещает полностью переопределять этот метод в классах наследниках
+    public final int getASize()
+    {
+        return aSize;
+    }
+    
+    public void setASize(int aSize)
+    {
+        this.aSize = aSize;
+    }
+    
+    public final int getBSize()
+    {
+        return bSize;
+    }
+    
+    public void setBSize(int bSize)
+    {
+        this.bSize = bSize;
+    }
+    
+    // обьявляется абстрактный метот и теперь каждый (!) класс-наследник
+    // обязан его переопределить, если не делать этого то появится ошибка
+    public abstract int perimeterValue();
+    
+    public void showPerimetr()
+    {
+        System.out.println(perimeterValue());
+    } 
+}
+
+public class triangle extends shape
+{
+    public int cSize;
+    
+    public triangle()
+    {
+        super();
+        this.cSize = 0;
+    }
+    
+    public triangle(int aSize, int bSize, int cSize)
+    {
+        super(aSize, bSize);
+        this.cSize = cSize;
+    }
+    
+    @Override
+    public int perimeterValue(){
+        return getASize() + getBSize() + cSize;
+    }
+}
+
+public class rectangle extends shape
+{
+    public rectangle()
+    {
+        super();
+    }
+    
+    public rectangle(int aSize, int bSize)
+    {
+        super(aSize, bSize);
+    }
+    
+    @Override
+    public int perimeterValue(){
+        return (getASize() + getBSize()) * 2;
+    }
+}
+
+// создаю дочерний класс от дочернего класса
+public class ColorRect extends rectangle
+{
+    private String color;
+    public ColorRect(int aSize, int bSize, String color)
+    {
+        super(aSize, bSize);
+        this.color = color;
+    }
+    
+    public String colorValue(){
+        return color;
+    }
+    
+    public void showColor()
+    {
+        System.out.println(colorValue());
+    }
+}
