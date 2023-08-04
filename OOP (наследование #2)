@@ -1,0 +1,157 @@
+
+public class Main
+{
+	public static void main(String[] args) {
+		box first = new box(9,100,11); // создаем коробку с определенными размерами
+		box second = new box(10);
+		
+		first.compareValue(second);
+		
+		box third = new box(first); // создаем коробку на основе другой коробки
+		third.showMethod();
+		
+		box fourth = first.copyMethod();
+		fourth.showMethod();
+		
+		box fivth = first.increase();
+		fivth.showMethod();
+		
+		first.showInfo();
+		
+		wBox sixth = new wBox(10,20,30,40); // создаем коробку у которой есть вес
+		sixth.showInfo();
+		
+	}
+}
+
+public class box 
+{
+    private int length;
+    private int wight;
+    private int height;
+    
+    public int getLength()
+    {
+        return length;
+    }
+    
+    public int getWight()
+    {
+        return wight;
+    }
+    
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public void setLength(int length)
+    {
+        this.length = length;
+    }
+    
+    public void setWight(int wight)
+    {
+        this.wight = wight;
+    }
+    
+    public void setHeight(int height)
+    {
+        this.height = height;
+    }
+    
+    public box(int length, int wight, int height) // конструктор коробки с разными сторонаями
+    {
+        this.length = length;
+        this.wight = wight;
+        this.height = height;
+    }
+    
+    public box() // пустой конструктор, для работы дочерних классов 
+    {
+    }
+    
+    public box(int size) // если коробка - это куб
+    {
+        this(size,size,size);
+    }
+    
+    public box(box another) // если коробка - на основе другой коробки создана
+    {
+        this(another.length,another.wight,another.height);
+    }
+    
+    private int getValue()
+    {
+        return length*wight*height;
+    }
+    
+    public void compareValue(box Object1) // сравниваем два обьекта
+    {
+        int firstValue = getValue();
+        int secondValue = Object1.getValue();
+        if (firstValue > secondValue){System.out.println("firstValue > secondValue");}
+        else if (firstValue < secondValue){System.out.println("firstValue < secondValue");}
+        else {System.out.println("firstValue == secondValue");}
+    }
+    
+    public void showInfo()
+    {
+        System.out.println("length: " + length + "\nwight: " +wight+"\nheight: "+height);    
+    }
+    
+    public box copyMethod()
+    {
+       return new box(this.length, this.wight, this.height);
+    }
+    
+    public box increase()
+    {
+       return new box(this.length*2, this.wight*2, this.height*2); 
+    }
+    
+    public void showMethod()
+    {
+        System.out.println("length: " +length+ "\nwight: "+wight+"\nheight: "+height);
+        System.out.println("#########");
+    }
+}
+
+public class wBox extends box
+{
+    private double weight;
+    
+    public wBox()
+    {
+        super(); // нужен пустой вызов суперкласса (без него не работает)
+        this.weight = 10.0;
+    }
+    
+    public wBox(box another, double weight)
+    {
+        super(another);
+        this.weight = weight;
+    }
+    
+    public wBox(int size, double weight)
+    {
+        super(size);
+        this.weight = weight;
+    }
+    
+    
+    public wBox(int length, int wight, int height, double weight)
+    {
+        super(length, wight, height);
+        this.weight = weight;
+    }
+    
+    @Override 
+    public void showInfo()
+    {
+        super.showInfo();
+        System.out.println("weight: "+weight);    
+    }
+}
+
+
