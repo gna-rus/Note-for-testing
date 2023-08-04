@@ -1,0 +1,93 @@
+import java.util.ArrayList;
+
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println(" ");
+		cat cat1 = new cat();
+		dog dog1 = new dog();
+		fish fish1 = new fish();
+		
+		// помещаю в коллекцию обьекты разных классов и это возможно потому что
+		// все классы имеют одинаковый родительский класс
+		ArrayList<Animal> animals = new ArrayList<>();
+		animals.add(cat1);
+		animals.add(dog1);
+		animals.add(fish1);
+		
+		for (Animal animal: animals)
+		{
+		    animal.sound();
+		}
+		
+		System.out.println(" ");
+		Animal dog2 = new dog(); // апкаст
+		dog2.sound();
+		dog dog3 = (dog)dog2;   // давнкаст (так как в родительском классе нет run
+		                        // то не получится запустить dog2)
+		dog3.run();
+		
+		cat1.toJump();// метод реализован через интерфейс
+		
+		ArrayList<interfaceToJump> animals2 = new ArrayList<>();
+		animals2.add(cat1);
+		// animals2.add(fish1); // эта строка вызовет ошибку 
+		                        // так как в классе fish не реализован интерфейс interfaceToJump
+		
+		
+	}
+}
+
+// родительский класс
+public abstract class Animal 
+{
+    public abstract void sound();    
+}
+
+
+// к классу прикручен интерфейс
+public class cat extends Animal implements interfaceToJump
+{
+    @Override
+    public void sound()
+    {
+        System.out.println("Мяу!");
+    }
+    
+    @Override
+    public void toJump()
+    {
+        System.out.println("Прык!");
+    }    
+}
+
+public class dog extends Animal
+{
+    @Override
+    public void sound()
+    {
+        System.out.println("Гав! Щя укушу!");
+    }
+    
+    public void run()
+    {
+        System.out.println("Бегу за мячиком!");
+    }    
+}
+
+public class fish extends Animal
+{
+    @Override
+    public void sound()
+    {
+        System.out.println("Буль-Буль!");
+    }
+}
+
+// реализация интерфейса
+// интерфейс - это чтото вроде контракта, который гарантирует что
+// в методе к которому он прикручен будут реализованы определенные в интерфейсе методы
+public interface interfaceToJump
+{
+    void toJump();
+}
