@@ -1,0 +1,61 @@
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		director director1 = new director();
+		programmer programmer1 = new programmer();
+		cook cook1 = new cook();
+		cook1.drive();
+		programmer1.drive();
+		director1.force(programmer1);
+	}
+}
+
+public interface worker
+{
+    void work();
+}
+
+public interface driver
+{
+    void drive();
+}
+
+// вот это очень интересная штука
+public class director
+{
+    public void force(worker worker1)
+    {
+        worker1.work(); // заставляет работать))
+    }
+}
+
+public class programmer implements worker, driver
+{
+    @Override
+    public void work()
+    {
+        System.out.println("Яростно пишу код!");
+    }
+    
+    @Override
+    public void drive()
+    {
+        System.out.println("Катаюсь на машине");
+    }
+}
+
+public class cook implements worker, driver
+{
+    @Override
+    public void work()
+    {
+        System.out.println("Кашу кашиварю!");
+    }
+    
+    @Override
+    public void drive()
+    {
+        System.out.println("Дрифтую на дорогах общего пользования");
+    }
+}
