@@ -1,0 +1,33 @@
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		client client1 = new client();
+		
+        // реализация интерфейса через анонимный класс
+        // передаю два обьекта (анонимный метод  Стринг)
+		client1.getOrder(new waiter()
+		{
+		    @Override
+            public void bringOrder(String nameOrder)
+            {
+                System.out.println("Ваш заказ " + nameOrder);
+            }
+		}, 
+		"Мороженка");
+	}
+}
+
+// интерфейс
+public interface waiter
+{
+    void bringOrder(String order);
+}
+
+public class client 
+{
+    void getOrder(waiter waiter1, String nameOrder)
+    {
+        waiter1.bringOrder(nameOrder);
+    }
+}
