@@ -1,0 +1,64 @@
+import java.util.Random;
+// сгенерировать случайное число, после чего программа должна определить это число, считаю кол-во попыток
+public class Main
+
+{
+  // внешняя переменная (флаг) для контроля, нашлась или нет переменная
+  static public boolean flag = false;
+    
+	public static void main(String[] args) 
+	{
+	    
+		Random rnd1 = new Random();
+		// генерирую число от 0 до 100
+		int rez = rnd1.nextInt(100);
+		// создаем первый поток
+		Thread thread1 = new Thread(new Runnable(){
+		    @Override
+                public void run()
+                {
+                    // ищу значение rez
+                    while( flag == false)
+                    {
+                        int num = rnd1.nextInt(100);
+                        System.out.println(rez + "-" + num);
+                        if(rez == num)
+                        {
+                            flag = true;
+                        }
+                        // просто запомни эту запись для паузы в 0.1 сек
+                        try
+                        {
+                            Thread.sleep(100);
+                        }
+                        catch (InterruptedException e){}
+                        //
+                    }
+                }
+		    });
+		// начинаю 1 поток (ищу число)
+		thread1.start();
+		
+		// создаем второй поток
+		Thread thread2 = new Thread(new Runnable()
+		{
+		    @Override
+                public void run()
+                {
+		            int count = 1;
+		            while(flag == false)
+		            {
+		                System.out.print(count + ": ");
+		                count++;
+		                try
+		                {
+                            Thread.sleep(100);
+                            }
+                        catch (InterruptedException e){}
+		            } 
+		}});
+		// начинаю 2 поток (счетчик)
+		thread2.start();
+		
+	}
+}
